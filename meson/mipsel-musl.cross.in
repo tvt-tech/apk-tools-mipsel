@@ -5,7 +5,10 @@ strip = 'mipsel-linux-musl-strip'
 pkg-config = 'pkg-config'
 
 [built-in options]
-c_link_args = ['-static', '-no-pie']
+# c_link_args (-static -no-pie) is passed on the meson setup command line
+# instead of here: meson's cross-file array parsing silently dropped the
+# second element when set via this ini file, whereas a python-literal
+# array on the CLI (-Dc_link_args="['-static','-no-pie']") works correctly.
 prefer_static = true
 default_library = 'static'
 
