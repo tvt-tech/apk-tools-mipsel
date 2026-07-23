@@ -37,5 +37,10 @@ meson setup --wipe \
 
 ninja -C "$BUILD_DIR" src/apk
 
-echo "Built: $BUILD_DIR/src/apk"
-file "$BUILD_DIR/src/apk"
+BIN="$BUILD_DIR/src/apk"
+
+echo "==> Stripping..."
+mipsel-linux-musl-strip --strip-all "$BIN"
+
+echo "Built: $BIN"
+file "$BIN"
