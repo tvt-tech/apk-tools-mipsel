@@ -135,3 +135,17 @@ sizes as e.g. "10.5 MiB"), so the risk it addresses is small but not zero.
   emit a literal `ld.so.1` `NEEDED` entry for the apk binary (only
   `libc.so.6`), so that step currently does nothing but is kept for
   parity/safety in case a future rebuild changes that.
+- **musl variant links `-static -no-pie`, not just `-static`** — the
+  musl.cc toolchain defaults to PIE, producing a `static-pie` executable.
+  On-device testing showed that hangs on this camera's kernel; a classic
+  `ET_EXEC` static binary (`-no-pie`) runs correctly. Passed via
+  `-Dc_link_args="['-static','-no-pie']"` on the `meson setup` command
+  line specifically — setting it as an array in the `.cross` ini file
+  silently dropped the second element (a meson cross-file parsing quirk),
+  so don't move it back there without re-checking.
+- **gnu variant strips *before* patchelf, not after** — patchelf rewrites
+  program headers (e.g. growing the dynamic string table for the new
+  RPATH), and running `strip` afterwards corrupted that layout (silently,
+  with only a `.dynstr` "outside segment" warning from `strip`) in a way
+  that made the device's kernel refuse to exec the binary
+  (`Invalid argument`). Verified on real hardware.
