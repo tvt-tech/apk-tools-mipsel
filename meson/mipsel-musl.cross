@@ -1,0 +1,20 @@
+[binaries]
+c = 'mipsel-linux-musl-gcc'
+ar = 'mipsel-linux-musl-ar'
+strip = 'mipsel-linux-musl-strip'
+pkg-config = 'pkg-config'
+
+[built-in options]
+c_link_args = ['-static']
+prefer_static = true
+default_library = 'static'
+
+[properties]
+pkg_config_libdir = ['/home/murphy/pyproj/apk-tools/apk-tools-mipsel/deps-musl-prefix/lib/pkgconfig']
+needs_exe_wrapper = true
+
+[host_machine]
+system = 'linux'
+cpu_family = 'mips'
+cpu = 'mips'
+endian = 'little'

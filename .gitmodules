@@ -1,0 +1,9 @@
+[submodule "apk-tools"]
+	path = deps/apk-tools
+	url = https://gitlab.alpinelinux.org/alpine/apk-tools.git
+[submodule "zlib"]
+	path = deps/zlib
+	url = https://github.com/madler/zlib.git
+[submodule "mbedtls"]
+	path = deps/mbedtls
+	url = https://github.com/Mbed-TLS/mbedtls.git

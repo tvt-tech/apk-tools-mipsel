@@ -1,0 +1,20 @@
+[binaries]
+c = 'mipsel-linux-gcc'
+ar = 'mipsel-linux-ar'
+strip = 'mipsel-linux-strip'
+# Not the toolchain's own bin/pkg-config wrapper: it hard-codes
+# PKG_CONFIG_SYSROOT_DIR and mangles the absolute paths in our .pc files.
+pkg-config = '/usr/bin/pkg-config'
+
+[built-in options]
+default_library = 'static'
+
+[properties]
+pkg_config_libdir = ['/home/murphy/pyproj/apk-tools/apk-tools-mipsel/deps-gnu-prefix/lib/pkgconfig']
+needs_exe_wrapper = true
+
+[host_machine]
+system = 'linux'
+cpu_family = 'mips'
+cpu = 'mips'
+endian = 'little'

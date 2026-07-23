@@ -1,0 +1,11 @@
+toolchain/
+toolchain-gnu/
+deps-build-musl/
+deps-musl-prefix/
+deps-build-gnu/
+deps-gnu-prefix/
+build-musl/
+build-gnu/
+*.tgz
+*.tar.gz
+*.tar.bz2
