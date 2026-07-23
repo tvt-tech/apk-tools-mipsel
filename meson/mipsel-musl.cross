@@ -5,7 +5,7 @@ strip = 'mipsel-linux-musl-strip'
 pkg-config = 'pkg-config'
 
 [built-in options]
-c_link_args = ['-static']
+c_link_args = ['-static', '-no-pie']
 prefer_static = true
 default_library = 'static'
 

@@ -30,7 +30,6 @@ meson setup --wipe \
 	-Dpython=disabled \
 	-Ddocs=disabled \
 	-Dtests=disabled \
-	-Dc_link_args=-static \
 	-Dprefer_static=true \
 	-Ddefault_library=static \
 	"$BUILD_DIR" "$ROOT/deps/apk-tools"

@@ -58,13 +58,17 @@ echo "apk-tools $VERSION, compiled for $ARCH."
 echo "==> Patching nan2008..."
 python3 "$ROOT/scripts/patch_nan2008.py" "$BIN"
 
+# Strip *before* patchelf: patchelf rewrites program headers (e.g. to grow
+# the dynamic string table for the new RPATH) and running strip afterwards
+# corrupts that layout (".dynstr outside segment" -> "Invalid argument" at
+# exec() on the device).
+echo "==> Stripping..."
+mipsel-linux-strip --strip-all "$BIN"
+
 echo "==> Patching rpath + linker..."
 patchelf --set-rpath "$RPATH" "$BIN"
 patchelf --set-interpreter "$INTERPRETER" "$BIN"
 patchelf --replace-needed ld.so.1 ld-linux-mipsn8.so.1 "$BIN"
-
-echo "==> Stripping..."
-mipsel-linux-strip --strip-all "$BIN"
 
 echo "Built: $BIN ($(wc -c < "$BIN") bytes)"
 file "$BIN"
